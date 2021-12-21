@@ -2,9 +2,16 @@ import './App.css';
 import Board from './components/Board'
 
 function App() {
+
+    const boardMatrix = [
+        [0,0,0,0,0],
+        [0,0,0,0,0],
+        [0,0,0,0,0],
+        [0,0,0,0,0]
+    ]
   return (
     <div className="App">
-      <Board/>
+      <Board boardMatrix={boardMatrix}/>
     </div>
   );
 }

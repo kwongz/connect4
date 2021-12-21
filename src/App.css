@@ -23,3 +23,7 @@ html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}bo
     border: 1px solid red;
     background: white;
 }
+
+.slotHover:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
