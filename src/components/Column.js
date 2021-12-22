@@ -1,12 +1,8 @@
 import React, { useRef, useState } from 'react'
 import Slot from './Slot'
 
-function Column({ handleTurn, playerOneTurn, columnId, getCoinPosition, checkRowWinner }) {
+function Column({ handleTurn, playerOneTurn, columnId, getCoinPosition, checkWinner }) {
 
-    const inputRef1 = useRef()
-    const inputRef2 = useRef()
-    const inputRef3 = useRef()
-    const inputRef4 = useRef()
     const columnRef = useRef()
     const [tracker, setTracker] = useState(0)
     const playerColor = () => playerOneTurn ? 'red' : 'yellow'
@@ -21,7 +17,7 @@ function Column({ handleTurn, playerOneTurn, columnId, getCoinPosition, checkRow
         const targetDiv = columnSlots.find(div => div.id == tracker)
         dropCoinIntoPosition(columnSlots, targetDiv)
         getCoinPosition(targetDiv.id, columnRef.current.id)
-        checkRowWinner(targetDiv.id, columnRef.current.id)
+        checkWinner(targetDiv.id, columnRef.current.id)
         handleTurn()
         console.log('///////////End of Turn//////////////')
     }
@@ -41,11 +37,11 @@ function Column({ handleTurn, playerOneTurn, columnId, getCoinPosition, checkRow
 
     return (
         <div className='column' onClick={e => handleCoinDrop(e)} id={columnId} ref={columnRef}>
-            <Slot inputRef={inputRef4} rowId={4}/>
-            <Slot inputRef={inputRef4} rowId={3}/>
-            <Slot inputRef={inputRef3} rowId={2}/>
-            <Slot inputRef={inputRef2} rowId={1}/>
-            <Slot inputRef={inputRef1} rowId={0}/>
+            <Slot rowId={4}/>
+            <Slot rowId={3}/>
+            <Slot rowId={2}/>
+            <Slot rowId={1}/>
+            <Slot rowId={0}/>
         </div>
     )
 }

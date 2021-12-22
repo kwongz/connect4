@@ -25,34 +25,33 @@ function Board({boardMatrix}) {
     // if they are the same track the number of consecutive coins
         // if they equal 4 WINNER
         // if they don't stop
-    const checkRowWinner = (slotId, columnId) => {
-        console.log('checking...')
-        console.log(boardMatrix)
+
+    const checkWinner = (slotId,columnId) => {
+        checkRowWinner(slotId)
+        checkColumnWinner(columnId)
+    }
+    const checkRowWinner = (slotId) => {
         let consecutiveCoin = 0
-        boardMatrix.map(row => {
+        boardMatrix.forEach(row => {
             if (row[slotId] === playerNumber) {
                 consecutiveCoin++
-                console.log(consecutiveCoin)
-            } 
+            }
         })
-        if (consecutiveCoin === 4) {
-            alert('winner')
+        if (consecutiveCoin >= 4) {
+            alert(`Player ${playerNumber} wins by row`)
         }
     }
 
-    const checkColumnWinner = (slotId, columnId) => {
-    console.log('checking...')
-    console.log(boardMatrix)
-    let consecutiveCoin = 0
-    boardMatrix.map(row => {
-        if (row[slotId] === playerNumber) {
-            consecutiveCoin++
-            console.log(consecutiveCoin)
-        } 
-    })
-    if (consecutiveCoin === 4) {
-        alert('winner')
-    }
+    const checkColumnWinner = (columnId) => {
+        let consecutiveCoin = 0
+        boardMatrix[columnId].forEach(slot => {
+            if(slot === playerNumber) {
+                consecutiveCoin++
+            }
+        })
+        if (consecutiveCoin >= 4) {
+            alert(`Player ${playerNumber} wins by column`)
+        }
 }
 
     return (
@@ -62,35 +61,35 @@ function Board({boardMatrix}) {
                 handleTurn={handleTurn} 
                 playerOneTurn={playerOneTurn} 
                 getCoinPosition={getCoinPosition}
-                checkRowWinner={checkRowWinner}
+                checkWinner={checkWinner}
                 columnId={0}
             />
             <Column 
                 handleTurn={handleTurn} 
                 playerOneTurn={playerOneTurn}
                 getCoinPosition={getCoinPosition}
-                checkRowWinner={checkRowWinner}
+                checkWinner={checkWinner}
                 columnId={1}
             />
             <Column 
                 handleTurn={handleTurn} 
                 playerOneTurn={playerOneTurn} 
                 getCoinPosition={getCoinPosition}
-                checkRowWinner={checkRowWinner}
+                checkWinner={checkWinner}
                 columnId={2}
             />
             <Column 
                 handleTurn={handleTurn} 
                 playerOneTurn={playerOneTurn}
                 getCoinPosition={getCoinPosition}
-                checkRowWinner={checkRowWinner}
+                checkWinner={checkWinner}
                 columnId={3}
             />
             <Column 
                 handleTurn={handleTurn} 
                 playerOneTurn={playerOneTurn}
                 getCoinPosition={getCoinPosition}
-                checkRowWinner={checkRowWinner}
+                checkWinner={checkWinner}
                 columnId={4}
             />
         </div>
