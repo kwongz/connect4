@@ -17,6 +17,7 @@ function Column({ handleTurn, playerOneTurn, columnId, getCoinPosition, checkWin
         const targetDiv = columnSlots.find(div => div.id == tracker)
         dropCoinIntoPosition(columnSlots, targetDiv)
         getCoinPosition(targetDiv.id, columnRef.current.id)
+        console.log('test')
         checkWinner(parseInt(targetDiv.id), parseInt(columnRef.current.id))
         handleTurn()
         console.log('///////////End of Turn//////////////')

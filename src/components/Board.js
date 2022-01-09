@@ -29,63 +29,70 @@ function Board({boardMatrix}) {
 
     const checkWinner = (slotId, columnId) => {
         let count = 0
-        let checkRight = true
+        let firstDirection = true
         console.log(boardMatrix)
         const manuel = {
             leftUpDiag: [-1, 1],
             leftDownDiag: [1, -1],
-            rightUpDiag: [-1, -1],
-            rightDownDiag: [1,1],
-            up: [1,0],
-            down:[-1,0],
-            right: [0,1],
-            left: [0,-1]
+            rightUpDiag: [1, 1],
+            rightDownDiag: [-1,-1],
+            up: [0,1],
+            down:[0,-1],
+            right: [1,0],
+            left: [-1,0]
         } 
         // Check Row winner
-        checkDirectionWinner(slotId, columnId, manuel.right, manuel.left, count, checkRight)
+        checkDirectionWinner(slotId, columnId, manuel.right, manuel.left, count, firstDirection)
         // Check ColumnWinner
-        // checkDirectionWinner(slotId, columnId, manuel.up, manuel.down, count, checkRight)
+        // checkDirectionWinner(slotId, columnId, manuel.up, manuel.down, count, firstDirection)
+        // check left to right diagonal \
+        // checkDirectionWinner(slotId, columnId, manuel.leftUpDiag, manuel.leftDownDiag, count, firstDirection)
+        // Check right to left diagonal /
+        // checkDirectionWinner(slotId, columnId, manuel.rightUpDiag, manuel.rightDownDiag, count, firstDirection)
 
     }
 
-    const checkDirectionWinner = (slotId, columnId, manuelRight, manuelLeft, count, checkRight) => {
+    const checkDirectionWinner = (slotId, columnId, firstDirectionManuel, secondDirectionManuel, count, firstDirection) => {
         console.log('New Function Execution')
         console.log('checking current column',columnId)
+        // debugger;
 
-        
         // Set the position value of the left and right coin of the current coin being checked
-        const rightCoinPos = columnId + manuelRight[1]
-        const leftCoinPos = columnId + manuelLeft[1]
+        const firstDirectionColPos = columnId + firstDirectionManuel[1]
+        const firstDirectionSlotPos = slotId + firstDirectionManuel[0]
+        const secondDirectionColPos = columnId + secondDirectionManuel[1]
+        const secondDirectionSlotPos = slotId + secondDirectionManuel[0]
         // when more then 3 coins have been counted
         if(count === 3){
             return alert('winner')
         }
 
         // Check left side of coin if at the edge of the right side of board
-        if(rightCoinPos === boardMatrix.length) {
-            checkRight = false;
+        if(firstDirectionColPos === boardMatrix.length ) {
+            firstDirection = false;
         }
+
         // Check Left side of coin
-        if(leftCoinPos > -1 && !checkRight) {
+        if(secondDirectionColPos > -1 && !firstDirection) {
             console.log('checking left');
-            if(boardMatrix[leftCoinPos][slotId] === playerNumber){
+            if(boardMatrix[secondDirectionColPos][secondDirectionSlotPos] === playerNumber){
                 count++;
                 console.log('left',count);
-                checkDirectionWinner(slotId, leftCoinPos, manuelRight, manuelLeft, count, checkRight);
+                checkDirectionWinner(secondDirectionSlotPos, secondDirectionColPos, firstDirectionManuel, secondDirectionManuel, count, firstDirection);
             }
         }
         
         // check right side of coin
-        if(rightCoinPos < boardMatrix.length && checkRight) {
-            if(boardMatrix[rightCoinPos][slotId] === playerNumber){
+        if(firstDirectionColPos < boardMatrix.length && firstDirection) {
+            if(boardMatrix[firstDirectionColPos][firstDirectionSlotPos] === playerNumber){
                 count++;
                 console.log('right',count);
-                checkDirectionWinner(slotId, rightCoinPos, manuelRight, manuelLeft, count, checkRight);
+                checkDirectionWinner(firstDirectionSlotPos, firstDirectionColPos, firstDirectionManuel, secondDirectionManuel, count, firstDirection);
             } else {
                 console.log('check left');
-                checkRight = false;
+                firstDirection = false;
                 count = 0;
-                checkDirectionWinner(slotId, columnId, manuelRight, manuelLeft, count, checkRight);
+                checkDirectionWinner(slotId, columnId, firstDirectionManuel, secondDirectionManuel, count, firstDirection);
             }
         }
 
