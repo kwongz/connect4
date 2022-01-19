@@ -1,8 +1,8 @@
 import React from 'react'
 
-function Slot({inputRef, rowId}) {
+function Slot({rowId, hoverStyle}) {
     return (
-        <div className='slot' ref={inputRef} id={rowId}>
+        <div className={`slot ${hoverStyle}`} id={rowId}>
             
         </div>
     )

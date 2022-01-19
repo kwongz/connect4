@@ -2,28 +2,48 @@ html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}bo
 
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 
+.wrapper {
+    width: 80%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
 
 .board {
     background: blue;
-    width: 100%;
-    max-width: 1000px;
     display: flex;
+    margin: 0 auto;
+    height: 550px;
+    width: 600px;
+}
+
+/* Shrink Board Size at smaller screens */
+@media (max-width: 800px) {
+    .board {
+        height: 315px;
+        width: 275px;
+    }
 }
 
 .board .column {
     display: flex;
     flex-direction: column;
+    align-items: center;
     flex-grow: 1;
+    border: 1px solid green;
 }
 
 .slot {
-    display: inline-block;
-    height: 250px;
+    /* display: inline-block; */
     border-radius: 50%;
-    border: 1px solid red;
+    border: 1px solid black;
+    height: 90%;
+    width: 90%;
     background: white;
+    margin: 10px 0px;
 }
 
-.slotHover:hover {
+.column:hover .hoverStyle {
     background-color: rgba(255, 255, 255, 0.5);
 }
+
+/*  */
